@@ -1,29 +1,29 @@
 # AL Carbon Calculator
 
-## Visao Geral
+## Visão Geral
 
-Backend em Java, Spring Boot e MongoDB para o desafio tecnico de calculadora de carbono. O sistema expoe uma API para iniciar um calculo, registrar informacoes complementares e obter a pegada de carbono final. A aplicacao tambem inclui um endpoint de saude e documentacao Swagger.
+Backend em Java, Spring Boot e MongoDB desenvolvido para o desafio técnico de calculadora de carbono. O sistema expõe uma API para iniciar um cálculo, registrar informações complementares e obter a pegada de carbono final. A aplicação também disponibiliza um endpoint de saúde e a documentação Swagger.
 
 ## Endpoints
 
-`POST /open/start-calc` recebe `name`, `email`, `phoneNumber` e `uf`, valida os campos obrigatorios, cria um novo calculo e devolve o identificador para as proximas etapas.
+`POST /open/start-calc` recebe `name`, `email`, `phoneNumber` e `uf`, valida os campos obrigatórios, cria um novo cálculo e devolve o identificador para as próximas etapas.
 
-`PUT /open/info` recebe o `id` do calculo e os dados de consumo de energia, transporte, residuos solidos e `recyclePercentage`. Se esse endpoint for chamado novamente para o mesmo `id`, os dados anteriores sao substituidos.
+`PUT /open/info` recebe o `id` do cálculo e os dados de consumo de energia, transporte, resíduos sólidos e `recyclePercentage`. Se esse endpoint for chamado novamente para o mesmo `id`, os dados anteriores são substituídos.
 
-`GET /open/result/{id}` busca o calculo salvo, carrega os fatores do banco e devolve a emissao de energia, a emissao de transporte, a emissao de residuos e o total final.
+`GET /open/result/{id}` busca o cálculo salvo, carrega os fatores do banco e devolve a emissão de energia, a emissão de transporte, a emissão de resíduos e o total final.
 
 ## Regras de Negocio
 
-Energia e calculada por `energyConsumption * emissionFactor`. Transporte e a soma de `monthlyDistance * factor` para cada item informado. Residuos usam `solidWasteTotal` ponderado entre os fatores reciclavel e nao reciclavel conforme o valor de `recyclePercentage`.
+Energia é calculada por `energyConsumption * emissionFactor`. Transporte é a soma de `monthlyDistance * factor` para cada item informado. Resíduos utilizam `solidWasteTotal` ponderado entre os fatores reciclável e não reciclável conforme o valor de `recyclePercentage`.
 
 ## Execucao
 
-O banco de dados e inicializado com `docker compose up -d` e os fatores sao carregados pelo script `init-mongo.js`. Se for necessario recriar o estado inicial, basta executar `docker compose down -v` e depois subir novamente.
+O banco de dados é inicializado com `docker compose up -d`, e os fatores são carregados pelo script `init-mongo.js`. Se for necessário recriar o estado inicial, basta executar `docker compose down -v` e subir novamente.
 
-A aplicacao roda em `http://localhost:8085` e a documentacao Swagger fica em `http://localhost:8085/swagger-ui.html`.
+A aplicação roda em `http://localhost:8085`, e a documentação Swagger fica em `http://localhost:8085/swagger-ui.html`.
 
-Para executar localmente, use Java 17, rode o Mongo com Docker Compose e depois inicie a aplicacao com `.\gradlew.bat bootRun`. Os testes podem ser executados com `.\gradlew.bat test`.
+Para executar localmente, utilize Java 17, inicie o Mongo com Docker Compose e depois execute a aplicação com `.\gradlew.bat bootRun`. Os testes podem ser executados com `.\gradlew.bat test`.
 
-## Observacoes
+## Observações
 
-Este repositorio foi organizado para entregar a solucao final do desafio, preservando o contrato da API e mantendo os nomes dos DTOs definidos pelo projeto original.
+Este repositório foi organizado para entregar a solução final do desafio, preservando o contrato da API e mantendo os nomes dos DTOs definidos pelo projeto original.
