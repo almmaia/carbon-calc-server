@@ -17,13 +17,13 @@ Busca o cálculo salvo, carrega os fatores do banco e devolve a emissão de ener
 
 ## Regras de Negócio
 
-Energia é calculada por `energyConsumption * emissionFactor`. Transporte é a soma de `monthlyDistance * factor` para cada item informado. Resíduos utilizam `solidWasteTotal` ponderado entre os fatores reciclável e não reciclável conforme o valor de `recyclePercentage`.
+A emissão de energia é calculada por `energyConsumption * emissionFactor`. A emissão de transporte corresponde à soma de `monthlyDistance * factor` para cada item informado. Já os resíduos utilizam `solidWasteTotal` ponderado entre os fatores reciclável e não reciclável, conforme o valor de `recyclePercentage`.
 
 ## Execução Local
 
-O banco de dados é inicializado com `docker compose up -d`, e os fatores são carregados pelo script `init-mongo.js`. Se for necessário recriar o estado inicial, execute `docker compose down -v` e suba novamente.
+O banco de dados é inicializado com `docker compose up -d`, e os fatores são carregados pelo script `init-mongo.js`. Se for necessário recriar o estado inicial, execute `docker compose down -v` e inicie novamente.
 
-A aplicação roda em `http://localhost:8085`, e a documentação Swagger fica em `http://localhost:8085/swagger-ui.html`.
+A aplicação roda em `http://localhost:8085`, e a documentação Swagger fica disponível em `http://localhost:8085/swagger-ui.html`.
 
 Para executar localmente, utilize Java 17, inicie o Mongo com Docker Compose e depois execute a aplicação com `.\gradlew.bat bootRun`. Os testes podem ser executados com `.\gradlew.bat test`.
 
