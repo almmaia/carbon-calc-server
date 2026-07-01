@@ -4,17 +4,17 @@
 
 Backend em Java, Spring Boot e MongoDB para o desafio tecnico de calculadora de carbono. O sistema expoe uma API para iniciar um calculo, registrar informacoes complementares e obter a pegada de carbono final. A aplicacao tambem inclui um endpoint de saude e documentacao Swagger.
 
-## Fluxo da API
+## Endpoints
 
-O fluxo comeca em `POST /open/start-calc`. Esse endpoint recebe `name`, `email`, `phoneNumber` e `uf`, valida os campos obrigatorios, cria um novo calculo e devolve o identificador para as proximas etapas.
+`POST /open/start-calc` recebe `name`, `email`, `phoneNumber` e `uf`, valida os campos obrigatorios, cria um novo calculo e devolve o identificador para as proximas etapas.
 
-Em seguida, `PUT /open/info` recebe o `id` do calculo e os dados de consumo de energia, transporte, residuos solidos e `recyclePercentage`. Se esse endpoint for chamado novamente para o mesmo `id`, os dados anteriores sao substituidos.
+`PUT /open/info` recebe o `id` do calculo e os dados de consumo de energia, transporte, residuos solidos e `recyclePercentage`. Se esse endpoint for chamado novamente para o mesmo `id`, os dados anteriores sao substituidos.
 
-Por fim, `GET /open/result/{id}` busca o calculo salvo, carrega os fatores do banco e devolve a emissao de energia, a emissao de transporte, a emissao de residuos e o total final.
+`GET /open/result/{id}` busca o calculo salvo, carrega os fatores do banco e devolve a emissao de energia, a emissao de transporte, a emissao de residuos e o total final.
 
 ## Regras de Negocio
 
-As regras seguem as formulas do desafio. Energia e calculada por `energyConsumption * emissionFactor`. Transporte e a soma de `monthlyDistance * factor` para cada item informado. Residuos usam `solidWasteTotal` ponderado entre os fatores reciclavel e nao reciclavel conforme o valor de `recyclePercentage`.
+Energia e calculada por `energyConsumption * emissionFactor`. Transporte e a soma de `monthlyDistance * factor` para cada item informado. Residuos usam `solidWasteTotal` ponderado entre os fatores reciclavel e nao reciclavel conforme o valor de `recyclePercentage`.
 
 ## Execucao
 
